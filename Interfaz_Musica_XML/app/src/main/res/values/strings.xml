@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Interfaz_Musica_XML</string>
+    <string name="cancion">Running Up That Hill</string>
+    <string name="album">Hounds Of Love</string>
+    <string name="artista">Kate Bush</string>
 </resources>
