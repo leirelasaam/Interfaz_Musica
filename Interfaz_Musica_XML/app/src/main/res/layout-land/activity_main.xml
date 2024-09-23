@@ -63,6 +63,7 @@
 
     <SeekBar
         android:id="@+id/barCancion"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="385dp"
         android:layout_height="wrap_content"
         android:progress="25"
