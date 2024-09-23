@@ -3,4 +3,6 @@
     <string name="cancion">Running Up That Hill</string>
     <string name="album">Hounds Of Love</string>
     <string name="artista">Kate Bush</string>
+    <string name="min_inicio">1:24</string>
+    <string name="min_fin">4:58</string>
 </resources>
