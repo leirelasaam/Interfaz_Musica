@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/imgPortada"
-        android:layout_width="481dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textAlbum"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="@+id/barVolumen"
         app:layout_constraintTop_toBottomOf="@+id/barVolumen"
         app:layout_constraintVertical_bias="0.38"
@@ -40,12 +40,15 @@
 
     <TextView
         android:id="@+id/textArtista"
-        android:layout_width="71dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:text="@string/artista"
-        android:textColor="@color/white"
+        android:textColor="@color/purple"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/barCancion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textAlbum"
         app:layout_constraintTop_toBottomOf="@+id/textAlbum" />
 
@@ -54,40 +57,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/album"
-        android:textColor="@color/white"
+        android:textColor="@color/gray"
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/textArtista"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textCancion"
         app:layout_constraintTop_toBottomOf="@+id/textCancion" />
 
     <SeekBar
         android:id="@+id/barCancion"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="385dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:progress="25"
-        android:progressTint="@color/white"
+        android:theme="@style/CustomSeekBar"
         app:layout_constraintBottom_toTopOf="@+id/iconoPlayPause"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textArtista"
+        app:layout_constraintStart_toStartOf="@+id/barVolumen"
         app:layout_constraintTop_toBottomOf="@+id/iconoCola"
         app:layout_constraintWidth_percent=".4" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/iconoLetra"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:backgroundTint="#191919"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/iconoCola"
         app:layout_constraintEnd_toStartOf="@+id/iconoCola"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@+id/barCancion"
+        app:layout_constraintStart_toStartOf="@+id/textArtista"
         app:layout_constraintTop_toTopOf="@+id/iconoCola"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/microphone" />
+        app:srcCompat="@drawable/lyrics" />
 
     <TextView
         android:id="@+id/textInicioMin"
@@ -97,7 +102,6 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/iconoPlayPause"
         app:layout_constraintEnd_toStartOf="@+id/textFinMin"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="@+id/barCancion"
         app:layout_constraintTop_toBottomOf="@+id/barCancion"
@@ -118,37 +122,37 @@
     <SeekBar
         android:id="@+id/barVolumen"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="280dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:progress="70"
-        android:progressTint="@color/white"
-        android:rotation="0"
+        android:theme="@style/CustomSeekBar"
         app:layout_constraintBottom_toBottomOf="@+id/iconoVolumen"
         app:layout_constraintEnd_toStartOf="@+id/iconoVolumen"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/imgPortada"
         app:layout_constraintTop_toTopOf="@+id/iconoVolumen" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/iconoVolumen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#191919"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/barCancion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/barVolumen"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.07999998"
-        app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+        app:srcCompat="@drawable/speaker" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/iconoCola"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:backgroundTint="#191919"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/barCancion"
         app:layout_constraintEnd_toStartOf="@+id/iconoComp"
         app:layout_constraintHorizontal_bias="0.5"
@@ -157,11 +161,11 @@
         app:layout_constraintVertical_bias="0.6"
         app:srcCompat="@drawable/list" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/iconoComp"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:backgroundTint="#191919"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@+id/iconoCola"
         app:layout_constraintEnd_toEndOf="@+id/barCancion"
         app:layout_constraintHorizontal_bias="0.5"
@@ -171,9 +175,11 @@
 
     <ImageButton
         android:id="@+id/iconoPlayPause"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#191919"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/rounded_bordered_button"
+        android:padding="10dp"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/iconoSig"
         app:layout_constraintEnd_toStartOf="@+id/iconoSig"
         app:layout_constraintHorizontal_bias="0.5"
@@ -183,9 +189,10 @@
 
     <ImageButton
         android:id="@+id/iconoPrev"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:backgroundTint="#191919"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@android:color/transparent"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/iconoPlayPause"
         app:layout_constraintEnd_toStartOf="@+id/iconoPlayPause"
         app:layout_constraintHorizontal_bias="0.5"
@@ -195,9 +202,10 @@
 
     <ImageButton
         android:id="@+id/iconoSig"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:backgroundTint="#191919"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@android:color/transparent"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

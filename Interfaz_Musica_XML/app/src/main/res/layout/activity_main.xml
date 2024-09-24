@@ -12,7 +12,7 @@
         android:id="@+id/textCancion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         android:text="@string/cancion"
         android:textColor="@color/white"
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/album"
-        android:textColor="@color/white"
+        android:textColor="@color/gray"
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/textArtista"
@@ -45,8 +45,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/artista"
-        android:textColor="@color/white"
+        android:textColor="@color/purple"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/barCancion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -57,12 +58,11 @@
         android:id="@+id/imgPortada"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/textCancion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barVolumen"
+        app:layout_constraintVertical_bias="0.58000004"
         app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/cover" />
 
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:progress="25"
-        android:progressTint="@color/white"
+        android:theme="@style/CustomSeekBar"
         app:layout_constraintBottom_toTopOf="@+id/iconoPlayPause"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,10 +85,10 @@
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:progress="70"
-        android:progressTint="@color/white"
+        android:theme="@style/CustomSeekBar"
         app:layout_constraintBottom_toBottomOf="@+id/iconoVolumen"
         app:layout_constraintEnd_toStartOf="@+id/iconoVolumen"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iconoVolumen"
         app:layout_constraintVertical_bias="0.48000002"
@@ -96,21 +96,25 @@
 
     <ImageButton
         android:id="@+id/iconoPlayPause"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#191919"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="fitCenter"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/iconoPrev"
         app:layout_constraintEnd_toStartOf="@+id/iconoSig"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iconoPrev"
         app:layout_constraintTop_toTopOf="@+id/iconoPrev"
-        app:srcCompat="@android:drawable/ic_media_play" />
+        app:srcCompat="@android:drawable/ic_media_play"
+        android:background="@drawable/rounded_bordered_button"
+        />
 
     <ImageButton
         android:id="@+id/iconoSig"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:backgroundTint="#191919"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@android:color/transparent"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/iconoPlayPause"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -118,7 +122,7 @@
         app:layout_constraintTop_toTopOf="@+id/iconoPlayPause"
         app:srcCompat="@android:drawable/ic_media_next" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/iconoComp"
         android:layout_width="20dp"
         android:layout_height="20dp"
@@ -129,7 +133,7 @@
         app:layout_constraintTop_toBottomOf="@+id/iconoPlayPause"
         app:srcCompat="@drawable/share" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/iconoCola"
         android:layout_width="20dp"
         android:layout_height="20dp"
@@ -143,35 +147,37 @@
         app:layout_constraintTop_toBottomOf="@+id/iconoPlayPause"
         app:srcCompat="@drawable/list" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/iconoLetra"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/lyrics"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iconoCola"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iconoPlayPause"
-        app:srcCompat="@drawable/microphone" />
+        app:layout_constraintTop_toBottomOf="@+id/iconoPlayPause" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/iconoVolumen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#191919"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toTopOf="@+id/imgPortada"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/barVolumen"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.32"
-        app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+        app:srcCompat="@drawable/speaker" />
 
     <ImageButton
         android:id="@+id/iconoPrev"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:backgroundTint="#191919"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@android:color/transparent"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/iconoLetra"
         app:layout_constraintEnd_toStartOf="@+id/iconoPlayPause"
         app:layout_constraintHorizontal_bias="0.5"
@@ -188,7 +194,7 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/iconoPlayPause"
         app:layout_constraintEnd_toStartOf="@+id/textFinMin"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barCancion" />
