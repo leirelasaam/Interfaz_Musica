@@ -83,6 +83,12 @@ fun AppMusica() {
 
 @Composable
 fun MusicaLayout(isLandscape: Boolean) {
+    val imageIcons = listOf(
+        Pair(painterResource(id = R.drawable.lyrics), "Icono letra"),
+        Pair(painterResource(id = R.drawable.list), "Icono cola"),
+        Pair(painterResource(id = R.drawable.share), "Icono compartir")
+    )
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -195,35 +201,25 @@ fun MusicaLayout(isLandscape: Boolean) {
                     ),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Box(
-                    modifier = Modifier.size(30.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.lyrics),
-                        contentDescription = "Icono letra",
-                        contentScale = ContentScale.Fit
-                    )
-                }
-                Box(
-                    modifier = Modifier.size(30.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.list),
-                        contentDescription = "Icono cola",
-                        contentScale = ContentScale.Fit
-                    )
-                }
-                Box(
-                    modifier = Modifier.size(30.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.share),
-                        contentDescription = "Icono compartir",
-                        contentScale = ContentScale.Fit
-                    )
+                // Iterar sobre los iconos para crearlos
+                for ((painter, descr) in imageIcons){
+                    ImageIcon(painter, descr)
                 }
             }
         }
+    }
+}
+
+@Composable
+fun ImageIcon(painter: Painter, descr: String){
+    Box(
+        modifier = Modifier.size(30.dp)
+    ) {
+        Image(
+            painter = painter,
+            contentDescription = descr,
+            contentScale = ContentScale.Fit
+        )
     }
 }
 
