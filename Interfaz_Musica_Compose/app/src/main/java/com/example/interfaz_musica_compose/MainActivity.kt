@@ -83,14 +83,11 @@ fun AppMusica() {
 
 @Composable
 fun MusicaLayout(isLandscape: Boolean) {
-    //var textOperation by rememberSaveable { mutableStateOf("") }
-    //var textResult by rememberSaveable { mutableStateOf("") }
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(R.color.dark_gray))
-            .padding(20.dp)
+            .padding(40.dp)
     ) {
         Column(
             modifier = Modifier
@@ -104,18 +101,9 @@ fun MusicaLayout(isLandscape: Boolean) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Slider(
-                    value = 0.7f,
-                    onValueChange = { },
-                    colors = SliderDefaults.colors(
-                        thumbColor = colorResource(R.color.white),
-                        activeTrackColor = colorResource(R.color.purple),
-                        inactiveTrackColor = colorResource(R.color.dark_purple),
-                    ),
-                    valueRange = 0f..1f,
-                    modifier = Modifier
-                        .weight(0.8f)
-                        .padding(0.dp, 0.dp, 20.dp, 0.dp)
+                SliderPurple(
+                    default = 0.7f,
+                    modifier = Modifier.weight(0.8f)
                 )
                 Image(
                     painter = painterResource(id = R.drawable.speaker),
@@ -158,15 +146,8 @@ fun MusicaLayout(isLandscape: Boolean) {
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
-                    Slider(
-                        value = 0.25f,
-                        onValueChange = { },
-                        colors = SliderDefaults.colors(
-                            thumbColor = colorResource(R.color.white),
-                            activeTrackColor = colorResource(R.color.purple),
-                            inactiveTrackColor = colorResource(R.color.dark_purple),
-                        ),
-                        valueRange = 0f..1f,
+                    SliderPurple(
+                        default = 0.25f,
                         modifier = Modifier.weight(0.8f)
                     )
                 }
@@ -274,7 +255,7 @@ fun ImageWithBg(painterImg: Painter) {
 }
 
 @Composable
-fun SliderVolume(default: Float, weight: Float) {
+fun SliderPurple(default: Float, modifier: Modifier) {
     var sliderPosition by remember { mutableFloatStateOf(default) }
     Slider(
         value = sliderPosition,
@@ -284,7 +265,8 @@ fun SliderVolume(default: Float, weight: Float) {
             activeTrackColor = colorResource(R.color.purple),
             inactiveTrackColor = colorResource(R.color.dark_purple),
         ),
-        valueRange = 0f..1f
+        valueRange = 0f..1f,
+        modifier = modifier
     )
 }
 
