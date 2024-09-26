@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -189,6 +190,135 @@ fun MusicaLayout(isLandscape: Boolean) {
     }
 }
 
+@Composable
+fun LandscapeLayout(){
+    val imageIcons = listOf(
+        Pair(painterResource(id = R.drawable.lyrics), "Icono letra"),
+        Pair(painterResource(id = R.drawable.list), "Icono cola"),
+        Pair(painterResource(id = R.drawable.share), "Icono compartir")
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colorResource(R.color.dark_gray))
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
+            Column() {
+                Image(
+                    painter = painterResource(id = R.drawable.cover),
+                    contentDescription = "Portada del álbum Hounds Of Love",
+                    contentScale = ContentScale.Crop
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .padding(20.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    SliderPurple(
+                        default = 0.7f,
+                        modifier = Modifier.weight(0.8f)
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.speaker),
+                        contentDescription = "Icono de volumen",
+                        modifier = Modifier.weight(0.1f)
+                    )
+                }
+                Column(
+                    modifier = Modifier.padding(0.dp, 5.dp)
+                ) {
+                    Text(
+                        "Running Up That Hill", color = colorResource(R.color.white),
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(0.dp, 10.dp)
+                    )
+                    Text(
+                        "Hounds Of Love",
+                        color = colorResource(R.color.gray),
+                        fontStyle = FontStyle.Italic
+                    )
+                    Text(
+                        "Kate Bush",
+                        color = colorResource(R.color.purple),
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement
+                        .spacedBy(
+                            space = 20.dp,
+                            alignment = Alignment.Start
+                        ),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    // Iterar sobre los iconos para crearlos
+                    for ((painter, descr) in imageIcons){
+                        ImageIcon(painter, descr)
+                    }
+                }
+                Column() {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        SliderPurple(
+                            default = 0.25f,
+                            modifier = Modifier.weight(0.8f)
+                        )
+                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text("1:24", color = colorResource(R.color.white))
+                        Text("4:58", color = colorResource(R.color.white))
+                    }
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Image(
+                        painter = painterResource(id = android.R.drawable.ic_media_previous),
+                        contentDescription = "Icono letra",
+                        modifier = Modifier.weight(1f),
+                        contentScale = ContentScale.Fit
+                    )
+
+                    ImageWithBg(
+                        painterImg = painterResource(id = android.R.drawable.ic_media_play)
+                    )
+
+                    Image(
+                        painter = painterResource(id = android.R.drawable.ic_media_next),
+                        contentDescription = "Icono compartir",
+                        modifier = Modifier.weight(1f),
+                        contentScale = ContentScale.Fit
+                    )
+                }
+            }
+        }
+    }
+}
+
 // Iconos de la parte inferior
 @Composable
 fun ImageIcon(painter: Painter, descr: String){
@@ -248,10 +378,10 @@ fun SliderPurple(default: Float, modifier: Modifier) {
     )
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, device = "spec:width=411dp,height=891dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape")
 @Composable
 fun AppMusicaPreview() {
     Interfaz_Musica_ComposeTheme {
-        AppMusica()
+        LandscapeLayout()
     }
 }
