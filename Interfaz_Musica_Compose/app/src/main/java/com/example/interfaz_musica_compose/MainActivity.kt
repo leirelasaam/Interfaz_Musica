@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,7 +26,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +38,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,6 +50,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             Interfaz_Musica_ComposeTheme {
                 AppMusica()
@@ -58,23 +63,28 @@ class MainActivity : ComponentActivity() {
 fun AppMusica() {
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-
     MusicLayout(isLandscape)
 }
 
 @Composable
 fun MusicLayout(isLandscape: Boolean) {
+    var isPlaying by rememberSaveable { mutableStateOf(false) }
+
     val imageIcons = listOf(
-        Pair(painterResource(id = R.drawable.lyrics), "Icono letra"),
-        Pair(painterResource(id = R.drawable.list), "Icono cola"),
-        Pair(painterResource(id = R.drawable.share), "Icono compartir")
+        Pair(painterResource(R.drawable.lyrics), stringResource(R.string.no_sp_letra)),
+        Pair(painterResource(R.drawable.list), stringResource(R.string.no_sp_lista)),
+        Pair(painterResource(R.drawable.share), stringResource(R.string.no_sp_compartir))
     )
 
     val multimediaIcons = listOf(
-        Triple(painterResource(id = R.drawable.atras), "Icono anterior", 30),
-        Triple(painterResource(id = R.drawable.play), "Icono play", 80),
-        Triple(painterResource(id = R.drawable.siguiente), "Icono siguiente", 30)
+        Triple(painterResource(R.drawable.atras), stringResource(R.string.no_sp_anterior), 30),
+        Triple(painterResource(if (isPlaying) R.drawable.pausa else R.drawable.play), stringResource(R.string.no_sp_play_pause), 80),
+        Triple(painterResource(R.drawable.siguiente), stringResource(R.string.no_sp_siguiente), 30)
     )
+
+    fun onBtnClick() {
+        isPlaying = !isPlaying
+    }
 
     if (isLandscape) {
         Row(
@@ -83,7 +93,7 @@ fun MusicLayout(isLandscape: Boolean) {
                 .background(colorResource(R.color.dark_gray)),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            PortadaAlbum(isLandscape)
+            PortadaAlbum(true)
             Column(
                 modifier = Modifier
                     .weight(1f)
@@ -95,7 +105,7 @@ fun MusicLayout(isLandscape: Boolean) {
                 SongInfo()
                 IconRow(imageIcons, true)
                 ProgressBar()
-                MultimediaIconsRow(multimediaIcons)
+                MultimediaIconsRow(multimediaIcons, ::onBtnClick)
             }
         }
     } else {
@@ -114,7 +124,7 @@ fun MusicLayout(isLandscape: Boolean) {
                 PortadaAlbum(false)
                 SongInfo()
                 ProgressBar()
-                MultimediaIconsRow(multimediaIcons)
+                MultimediaIconsRow(multimediaIcons, ::onBtnClick)
                 IconRow(imageIcons, false)
             }
         }
@@ -130,8 +140,8 @@ fun PortadaAlbum(isLandscape: Boolean) {
                 .fillMaxWidth(0.4f)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.cover),
-                contentDescription = "Portada del álbum Hounds Of Love",
+                painter = painterResource(R.drawable.cover),
+                contentDescription = stringResource(R.string.no_sp_portada),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
@@ -143,8 +153,8 @@ fun PortadaAlbum(isLandscape: Boolean) {
                 .padding(0.dp, 10.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.cover),
-                contentDescription = "Portada del álbum Hounds Of Love",
+                painter = painterResource(R.drawable.cover),
+                contentDescription = stringResource(R.string.no_sp_portada),
                 modifier = Modifier.weight(1f),
                 contentScale = ContentScale.Fit
             )
@@ -166,8 +176,8 @@ fun SliderVolume() {
             modifier = Modifier.weight(0.8f)
         )
         Image(
-            painter = painterResource(id = R.drawable.speaker),
-            contentDescription = "Icono de volumen",
+            painter = painterResource(R.drawable.speaker),
+            contentDescription = stringResource(R.string.no_sp_volumen),
             modifier = Modifier.weight(0.1f)
         )
     }
@@ -193,18 +203,18 @@ fun SliderPurple(default: Float, modifier: Modifier) {
 fun SongInfo() {
     Column {
         Text(
-            "Running Up That Hill", color = colorResource(R.color.white),
+            stringResource(R.string.cancion), color = colorResource(R.color.white),
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(0.dp, 10.dp)
         )
         Text(
-            "Hounds Of Love",
+            stringResource(R.string.album),
             color = colorResource(R.color.gray),
             fontStyle = FontStyle.Italic
         )
         Text(
-            "Kate Bush",
+            stringResource(R.string.artista),
             color = colorResource(R.color.purple),
             fontWeight = FontWeight.Bold
         )
@@ -221,14 +231,14 @@ fun ProgressBar() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text("1:24", color = colorResource(R.color.white))
-            Text("4:58", color = colorResource(R.color.white))
+            Text(stringResource(R.string.min_fin), color = colorResource(R.color.white))
+            Text(stringResource(R.string.min_fin), color = colorResource(R.color.white))
         }
     }
 }
 
 @Composable
-fun MultimediaIconsRow(icons: List<Triple<Painter, String, Int>>) {
+fun MultimediaIconsRow(icons: List<Triple<Painter, String, Int>>, onPlayPauseClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -237,7 +247,19 @@ fun MultimediaIconsRow(icons: List<Triple<Painter, String, Int>>) {
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         icons.forEach { (painter, descr, size) ->
-            ImageIcon(painter, descr, size)
+            val modifier = if (descr == stringResource(R.string.no_sp_play_pause)) {
+                Modifier.clickable { onPlayPauseClick() }
+            } else {
+                Modifier
+            }
+
+            Box(modifier = modifier.size(size.dp)) {
+                Image(
+                    painter = painter,
+                    contentDescription = descr,
+                    contentScale = ContentScale.Fit
+                )
+            }
         }
     }
 }
