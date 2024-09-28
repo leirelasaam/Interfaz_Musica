@@ -39,9 +39,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateButtonImage(btn: ImageButton) {
         if (isPlaying) {
-            btn.setImageResource(android.R.drawable.ic_media_pause)
+            btn.setImageResource(R.drawable.pausa)
         } else {
-            btn.setImageResource(android.R.drawable.ic_media_play)
+            btn.setImageResource(R.drawable.play)
         }
     }
 

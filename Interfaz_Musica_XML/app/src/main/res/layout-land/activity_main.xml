@@ -19,7 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent=".5"
-        app:srcCompat="@drawable/cover" />
+        app:srcCompat="@drawable/cover"
+        android:contentDescription="@string/no_sp_portada"/>
 
     <TextView
         android:id="@+id/textCancion"
@@ -92,13 +93,14 @@
         app:layout_constraintStart_toStartOf="@+id/textArtista"
         app:layout_constraintTop_toTopOf="@+id/iconoCola"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/lyrics" />
+        app:srcCompat="@drawable/lyrics"
+        android:contentDescription="@string/no_sp_letra"/>
 
     <TextView
         android:id="@+id/textInicioMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1:24"
+        android:text="@string/min_inicio"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/iconoPlayPause"
         app:layout_constraintEnd_toStartOf="@+id/textFinMin"
@@ -144,7 +146,8 @@
         app:layout_constraintStart_toEndOf="@+id/barVolumen"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.07999998"
-        app:srcCompat="@drawable/speaker" />
+        app:srcCompat="@drawable/speaker"
+        android:contentDescription="@string/no_sp_volumen"/>
 
     <ImageView
         android:id="@+id/iconoCola"
@@ -159,7 +162,8 @@
         app:layout_constraintStart_toEndOf="@+id/iconoLetra"
         app:layout_constraintTop_toBottomOf="@+id/textArtista"
         app:layout_constraintVertical_bias="0.6"
-        app:srcCompat="@drawable/list" />
+        app:srcCompat="@drawable/list"
+        android:contentDescription="@string/no_sp_lista"/>
 
     <ImageView
         android:id="@+id/iconoComp"
@@ -171,13 +175,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iconoCola"
         app:layout_constraintTop_toTopOf="@+id/iconoCola"
-        app:srcCompat="@drawable/share" />
+        app:srcCompat="@drawable/share"
+        android:contentDescription="@string/no_sp_compartir"/>
 
     <ImageButton
         android:id="@+id/iconoPlayPause"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/rounded_bordered_button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="#00FFFFFF"
         android:padding="10dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/iconoSig"
@@ -185,12 +190,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iconoPrev"
         app:layout_constraintTop_toTopOf="@+id/iconoSig"
-        app:srcCompat="@android:drawable/ic_media_play" />
+        app:srcCompat="@drawable/play"
+        android:contentDescription="@string/no_sp_play_pause"/>
 
     <ImageButton
         android:id="@+id/iconoPrev"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#00FFFFFF"
         android:backgroundTint="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="@+id/iconoPlayPause"
@@ -198,12 +205,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imgPortada"
         app:layout_constraintTop_toTopOf="@+id/iconoPlayPause"
-        app:srcCompat="@android:drawable/ic_media_previous" />
+        app:srcCompat="@drawable/atras"
+        android:contentDescription="@string/no_sp_anterior"/>
 
     <ImageButton
         android:id="@+id/iconoSig"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="#00FFFFFF"
         android:backgroundTint="@android:color/transparent"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -212,6 +221,7 @@
         app:layout_constraintStart_toEndOf="@+id/iconoPlayPause"
         app:layout_constraintTop_toBottomOf="@+id/barCancion"
         app:layout_constraintVertical_bias="0.49"
-        app:srcCompat="@android:drawable/ic_media_next" />
+        app:srcCompat="@drawable/siguiente"
+        android:contentDescription="@string/no_sp_siguiente"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

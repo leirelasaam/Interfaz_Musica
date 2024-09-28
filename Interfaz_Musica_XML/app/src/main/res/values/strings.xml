@@ -5,4 +5,12 @@
     <string name="artista">Kate Bush</string>
     <string name="min_inicio">1:24</string>
     <string name="min_fin">4:58</string>
+    <string name="no_sp_compartir">Icono compartir</string>
+    <string name="no_sp_lista">Icono cola</string>
+    <string name="no_sp_letra">Icono letra</string>
+    <string name="no_sp_portada">Imagen de portada del disco</string>
+    <string name="no_sp_anterior">Icono para pasar a la canción anterior</string>
+    <string name="no_sp_play_pause">Icono de play/pause</string>
+    <string name="no_sp_siguiente">Icono para pasar a la canción siguiente</string>
+    <string name="no_sp_volumen">Icono volumen</string>
 </resources>
