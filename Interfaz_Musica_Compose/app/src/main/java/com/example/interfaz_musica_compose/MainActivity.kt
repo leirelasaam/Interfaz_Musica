@@ -7,19 +7,16 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
@@ -32,7 +29,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
@@ -46,6 +42,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.interfaz_musica_compose.ui.theme.Interfaz_Musica_ComposeTheme
 
+/**
+ * Actividad principal de la aplicación de música.
+ *
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +59,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+/**
+ * Comprueba la orientación del dispositivo.
+ *
+ */
 @Composable
 fun AppMusica() {
     val configuration = LocalConfiguration.current
@@ -66,22 +70,39 @@ fun AppMusica() {
     MusicLayout(isLandscape)
 }
 
+/**
+ * Representa el diseño de la interfaz que se adapta a la orientación del dispositivo.
+ *
+ * @param isLandscape Un booleano que indica si la orientación de la pantalla es horizontal (true) o vertical (false).
+ */
 @Composable
 fun MusicLayout(isLandscape: Boolean) {
+    // Variable para controlar el botón de play/pause y guardar su estado
     var isPlaying by rememberSaveable { mutableStateOf(false) }
 
+    // Listado de iconos (letra, lista, compartir)
     val imageIcons = listOf(
         Pair(painterResource(R.drawable.lyrics), stringResource(R.string.no_sp_letra)),
         Pair(painterResource(R.drawable.list), stringResource(R.string.no_sp_lista)),
         Pair(painterResource(R.drawable.share), stringResource(R.string.no_sp_compartir))
     )
 
+    // Listado de iconos para el control de la reproducción (anterior, play/pause, siguiente)
     val multimediaIcons = listOf(
         Triple(painterResource(R.drawable.atras), stringResource(R.string.no_sp_anterior), 30),
-        Triple(painterResource(if (isPlaying) R.drawable.pausa else R.drawable.play), stringResource(R.string.no_sp_play_pause), 80),
+        Triple(
+            // Control del icono a mostrar según el valor de isPlaying
+            painterResource(if (isPlaying) R.drawable.pausa else R.drawable.play),
+            stringResource(R.string.no_sp_play_pause),
+            80
+        ),
         Triple(painterResource(R.drawable.siguiente), stringResource(R.string.no_sp_siguiente), 30)
     )
 
+    /**
+     * Cambia el estado de la variable isPlaying.
+     *
+     */
     fun onBtnClick() {
         isPlaying = !isPlaying
     }
@@ -113,12 +134,10 @@ fun MusicLayout(isLandscape: Boolean) {
             modifier = Modifier
                 .fillMaxSize()
                 .background(colorResource(R.color.dark_gray))
-                .padding(40.dp, 60.dp),
-            verticalArrangement = Arrangement.Center
+                .padding(40.dp, 60.dp), verticalArrangement = Arrangement.Center
         ) {
             Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween
             ) {
                 SliderVolume()
                 PortadaAlbum(false)
@@ -131,6 +150,11 @@ fun MusicLayout(isLandscape: Boolean) {
     }
 }
 
+/**
+ * Componente para la portada del disco, cuya disposición depende de la orientación del dispositivo.
+ *
+ * @param isLandscape Un booleano que indica si la orientación de la pantalla es horizontal (true) o vertical (false).
+ */
 @Composable
 fun PortadaAlbum(isLandscape: Boolean) {
     if (isLandscape) {
@@ -162,6 +186,10 @@ fun PortadaAlbum(isLandscape: Boolean) {
     }
 }
 
+/**
+ * Componente que utiliza el otro componente SliderPurple para añadir el control del volumen.
+ *
+ */
 @Composable
 fun SliderVolume() {
     Row(
@@ -172,8 +200,7 @@ fun SliderVolume() {
         horizontalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         SliderPurple(
-            default = 0.7f,
-            modifier = Modifier.weight(0.8f)
+            default = 0.7f, modifier = Modifier.weight(0.8f)
         )
         Image(
             painter = painterResource(R.drawable.speaker),
@@ -183,6 +210,12 @@ fun SliderVolume() {
     }
 }
 
+/**
+ * Componente para crear un slider con modificaciones de estilo.
+ *
+ * @param default Un Float que indica el valor por defecto del thumb.
+ * @param modifier Un Modifier que se aplica en el slider.
+ */
 @Composable
 fun SliderPurple(default: Float, modifier: Modifier) {
     var sliderPosition by remember { mutableFloatStateOf(default) }
@@ -199,11 +232,17 @@ fun SliderPurple(default: Float, modifier: Modifier) {
     )
 }
 
+/**
+ * Componente que agrupa los textos referentes a la canción en reproducción.
+ * Se muestran el nombre, álbum y artista, en este orden.
+ *
+ */
 @Composable
 fun SongInfo() {
     Column {
         Text(
-            stringResource(R.string.cancion), color = colorResource(R.color.white),
+            stringResource(R.string.cancion),
+            color = colorResource(R.color.white),
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(0.dp, 10.dp)
@@ -221,6 +260,11 @@ fun SongInfo() {
     }
 }
 
+/**
+ * Componente que utiliza el otro componente SliderPurple para crear el slider del tiempo de reproducción de la canción.
+ * Se muestra el tiempo de reproducción y el tiempo restante.
+ *
+ */
 @Composable
 fun ProgressBar() {
     Column {
@@ -228,8 +272,7 @@ fun ProgressBar() {
             SliderPurple(default = 0.25f, modifier = Modifier.weight(0.8f))
         }
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(stringResource(R.string.min_fin), color = colorResource(R.color.white))
             Text(stringResource(R.string.min_fin), color = colorResource(R.color.white))
@@ -237,6 +280,12 @@ fun ProgressBar() {
     }
 }
 
+/**
+ * Componente para generar la fila de iconos en el control de la reproducción.
+ *
+ * @param icons Lista que contiene los iconos a añadir.
+ * @param onPlayPauseClick Función onClick para el botón de play/pause.
+ */
 @Composable
 fun MultimediaIconsRow(icons: List<Triple<Painter, String, Int>>, onPlayPauseClick: () -> Unit) {
     Row(
@@ -255,15 +304,19 @@ fun MultimediaIconsRow(icons: List<Triple<Painter, String, Int>>, onPlayPauseCli
 
             Box(modifier = modifier.size(size.dp)) {
                 Image(
-                    painter = painter,
-                    contentDescription = descr,
-                    contentScale = ContentScale.Fit
+                    painter = painter, contentDescription = descr, contentScale = ContentScale.Fit
                 )
             }
         }
     }
 }
 
+/**
+ * Componente para generar una fila de iconos.
+ *
+ * @param icons Lista de iconos a añadir.
+ * @param isLandscape Un booleano que indica si la orientación de la pantalla es horizontal (true) o vertical (false).
+ */
 @Composable
 fun IconRow(icons: List<Pair<Painter, String>>, isLandscape: Boolean) {
     Row(
@@ -283,17 +336,26 @@ fun IconRow(icons: List<Pair<Painter, String>>, isLandscape: Boolean) {
     }
 }
 
+/**
+ * Componente para añadir una imagen.
+ *
+ * @param painter Painter que se utiliza para dibujar la imagen.
+ * @param descr Descripción de la imagen para la accesibilidad.
+ * @param size Tamaño del contenedor de la imagen.
+ */
 @Composable
 fun ImageIcon(painter: Painter, descr: String, size: Int) {
     Box(modifier = Modifier.size(size.dp)) {
         Image(
-            painter = painter,
-            contentDescription = descr,
-            contentScale = ContentScale.Fit
+            painter = painter, contentDescription = descr, contentScale = ContentScale.Fit
         )
     }
 }
 
+/**
+ * Componente de vista previa para la aplicación de música.
+ *
+ */
 @Preview(showBackground = true)
 @Composable
 fun AppMusicaPreview() {
