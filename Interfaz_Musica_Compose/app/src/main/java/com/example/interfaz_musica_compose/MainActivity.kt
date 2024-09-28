@@ -47,6 +47,11 @@ import com.example.interfaz_musica_compose.ui.theme.Interfaz_Musica_ComposeTheme
  *
  */
 class MainActivity : ComponentActivity() {
+    /**
+     * Método llamado cuando la actividad se crea por primera vez.
+     *
+     * @param savedInstanceState Bundle que contiene el estado guardado de la actividad, si está disponible.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
