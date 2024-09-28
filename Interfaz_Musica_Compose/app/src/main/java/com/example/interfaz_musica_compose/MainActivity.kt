@@ -159,7 +159,7 @@ fun SliderVolume() {
             .fillMaxWidth()
             .padding(0.dp, 10.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         SliderPurple(
             default = 0.7f,
