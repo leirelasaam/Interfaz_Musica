@@ -361,7 +361,18 @@ fun ImageIcon(painter: Painter, descr: String, size: Int) {
  * Componente de vista previa para la aplicación de música.
  *
  */
-@Preview(showBackground = true)
+// Apaisado
+@Preview(
+    showBackground = true,
+    heightDp = 412,
+    widthDp = 873
+)
+// Vertical
+@Preview(
+    showBackground = true,
+    widthDp = 412,
+    heightDp = 873
+)
 @Composable
 fun AppMusicaPreview() {
     Interfaz_Musica_ComposeTheme {
