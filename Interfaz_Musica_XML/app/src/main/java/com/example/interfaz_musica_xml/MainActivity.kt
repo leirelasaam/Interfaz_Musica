@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat
  *
  */
 class MainActivity : AppCompatActivity() {
-    private var isPlaying = false;
+    private var estaReproduciendo: Boolean = false;
 
     /**
      * Método llamado cuando la actividad se crea por primera vez.
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         // Verificar si hay un estado guardado y restaurar el estado
         if (savedInstanceState != null) {
-            isPlaying = savedInstanceState.getBoolean("isPlaying", false)
+            estaReproduciendo = savedInstanceState.getBoolean("estaReproduciendo", false)
         }
 
         val btn: ImageButton = findViewById(R.id.iconoPlayPause)
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         // Añadir manejo del estado de reproducción del botón de reproducción/pausa
         btn.setOnClickListener {
             // Cambia el valor de la variable isPlaying
-            isPlaying = !isPlaying
+            estaReproduciendo = !estaReproduciendo
             // Actualiza la imagen del botón
             actualizarImg(btn)
         }
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
      * @param btn Botón en el cual se realiza el cambio de la imagen.
      */
     private fun actualizarImg(btn: ImageButton) {
-        if (isPlaying) {
+        if (estaReproduciendo) {
             btn.setImageResource(R.drawable.pausa)
         } else {
             btn.setImageResource(R.drawable.play)
@@ -62,11 +62,12 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Guarda el estado de la instancia de la actividad.
+     * Se almacena el valor booleano de la variable estaReproduciendo.
      *
      * @param outState El `Bundle` en el que se deben guardar los estados de la actividad.
      */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean("isPlaying", isPlaying)
+        outState.putBoolean("estaReproduciendo", estaReproduciendo)
     }
 }
