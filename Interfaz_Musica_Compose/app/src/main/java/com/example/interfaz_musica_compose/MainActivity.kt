@@ -199,10 +199,10 @@ fun PortadaAlbum(esApaisado: Boolean) {
  */
 @Composable
 fun SliderPersonalizado(predeterminado: Float, modifier: Modifier) {
-    var sliderPosition by remember { mutableFloatStateOf(predeterminado) }
+    var posicion = predeterminado
     Slider(
-        value = sliderPosition,
-        onValueChange = { sliderPosition = it },
+        value = posicion,
+        onValueChange = { posicion = it },
         colors = SliderDefaults.colors(
             thumbColor = colorResource(R.color.white),
             activeTrackColor = colorResource(R.color.purple),
